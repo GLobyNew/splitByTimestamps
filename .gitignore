@@ -23,3 +23,12 @@ go.work.sum
 
 # env file
 .env
+
+# multimedia files
+*.mp3
+*.mp4
+*.webm
+*.m4a
+
+# .txt files
+*.txt
