@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path"
 	"strings"
 )
 
@@ -17,20 +16,17 @@ type timestamp struct {
 
 func printTimeStamps(t []timestamp) {
 	for _, entry := range t {
-		fmt.Printf("time: %v name: %v\n", entry.start, entry.name)
+		fmt.Printf("start time: %v, end time: %v, name: %v\n", entry.start, entry.end, entry.name)
 	}
 }
 
 func readTimeStamps(file_name string) ([]timestamp, error) {
 	timestamps := []timestamp{}
-	execPath, err := os.Executable()
+
+	path_to_file, err := makeFilePath(file_name)
 	if err != nil {
 		return []timestamp{}, err
 	}
-	workfolder := path.Dir(execPath)
-	path_to_file := workfolder + "/" + file_name
-	fmt.Println(path_to_file)
-
 	file, err := os.Open(path_to_file)
 	if err != nil {
 		return []timestamp{}, err
@@ -39,17 +35,28 @@ func readTimeStamps(file_name string) ([]timestamp, error) {
 
 	scanner := bufio.NewScanner(file)
 
+	firstScan := true
+
 	for scanner.Scan() {
 		line := scanner.Text()
-		fmt.Println(line)
-		time, name, found:= strings.Cut(line, " ")
+		startTime, name, found := strings.Cut(line, " ")
 		if !found {
 			continue
 		}
 		timestamps = append(timestamps, timestamp{
 			name:  name,
-			start: time,
+			start: startTime,
 		})
+		if !firstScan {
+			timestamps[len(timestamps)-1].end = startTime
+		}
+		firstScan = false
+	}
+
+	timestamps[len(timestamps)-1].end, err = getLenFile(os.Args[1])
+
+	if err != nil {
+		return []timestamp{}, err
 	}
 
 	return timestamps, nil
@@ -70,4 +77,5 @@ func main() {
 	}
 
 	printTimeStamps(timestamps)
+
 }
