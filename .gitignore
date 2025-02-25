@@ -34,4 +34,4 @@ go.work.sum
 *.txt
 
 # exclude binary
-splitByTimestamps
+splitByTimestamps*
