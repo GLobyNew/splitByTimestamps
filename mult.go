@@ -33,6 +33,11 @@ func getLenFile(file_name string) (string, error) {
 		return "", errors.New("can't find end of file in mult.go")
 	}
 
-	return trimmedRes, nil
+	formattedStr, err := formatStrTimestamp(trimmedRes)
+	if err != nil {
+		return "", err
+	}
+
+	return formattedStr, nil
 
 }
