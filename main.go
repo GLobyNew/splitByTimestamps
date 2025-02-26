@@ -20,7 +20,6 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	printTimeStamps(timestamps)
 	sourceFilePath, err := makeFilePath(args[0])
 	if err != nil {
 		log.Fatalln(err)

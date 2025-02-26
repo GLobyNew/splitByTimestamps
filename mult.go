@@ -23,7 +23,7 @@ func getLenFile(file_name string) (string, error) {
 	cmd := exec.Command(app, appArgs...)
 
 	result, err := cmd.Output()
-
+	
 	if err != nil {
 		return "", err
 	}

@@ -14,11 +14,11 @@ type timestamp struct {
 	end   string
 }
 
-func printTimeStamps(t []timestamp) {
-	for _, entry := range t {
-		fmt.Printf("start time: %v, end time: %v, name: %v\n", entry.start, entry.end, entry.name)
-	}
-}
+//func printTimeStamps(t []timestamp) {
+	//for _, entry := range t {
+		//fmt.Printf("start time: %v, end time: %v, name: %v\n", entry.start, entry.end, entry.name)
+	//}
+//}
 
 func formatStrTimestamp(t string) (string, error) {
 	splTimestamps := strings.Split(t, ":")
