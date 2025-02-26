@@ -46,6 +46,15 @@ func formatStrTimestamp(t string) (string, error) {
 
 }
 
+func validateTimestamps(t []timestamp) error {
+	for _, entry := range t {
+		if len(entry.start) != 8 || len(entry.end) != 8 || len(entry.name) < 1 {
+			return errors.New("failed to validate timestamps")
+		}
+	}
+	return nil
+}
+
 func readTimeStamps(file_name string) ([]timestamp, error) {
 	timestamps := []timestamp{}
 
@@ -85,6 +94,11 @@ func readTimeStamps(file_name string) ([]timestamp, error) {
 
 	timestamps[len(timestamps)-1].end, err = getLenFile(os.Args[1])
 
+	if err != nil {
+		return []timestamp{}, err
+	}
+
+	err = validateTimestamps(timestamps)
 	if err != nil {
 		return []timestamp{}, err
 	}

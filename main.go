@@ -21,5 +21,12 @@ func main() {
 	}
 
 	printTimeStamps(timestamps)
-
+	sourceFilePath, err := makeFilePath(args[0])
+	if err != nil {
+		log.Fatalln(err)
+	}
+	err = processFile(sourceFilePath, timestamps)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
