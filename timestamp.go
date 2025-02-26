@@ -15,9 +15,9 @@ type timestamp struct {
 }
 
 //func printTimeStamps(t []timestamp) {
-	//for _, entry := range t {
-		//fmt.Printf("start time: %v, end time: %v, name: %v\n", entry.start, entry.end, entry.name)
-	//}
+//for _, entry := range t {
+//fmt.Printf("start time: %v, end time: %v, name: %v\n", entry.start, entry.end, entry.name)
+//}
 //}
 
 func formatStrTimestamp(t string) (string, error) {
@@ -57,7 +57,6 @@ func validateTimestamps(t []timestamp) error {
 
 func readTimeStamps(file_name string) ([]timestamp, error) {
 	timestamps := []timestamp{}
-
 	path_to_file, err := makeFilePath(file_name)
 	if err != nil {
 		return []timestamp{}, err
